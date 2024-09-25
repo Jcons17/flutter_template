@@ -8,3 +8,7 @@ targets:
         generate_for:
           - lib/core/dependency_injection.dart
           - lib/core/infrastructure/**/**_impl.dart
+      freezed:
+        generate_for:
+          - lib/core/domain/entity/**.dart
+          - lib/core/application/**/**_state.dart   

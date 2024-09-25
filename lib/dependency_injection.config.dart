@@ -11,6 +11,7 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import 'core/domain/repository/example_repository.dart' as _i928;
 import 'core/infrastructure/repositories/example_repository_impl.dart' as _i434;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -24,7 +25,7 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.lazySingleton<_i434.ExampleRepositoryImpl>(
+    gh.lazySingleton<_i928.ExampleRepository>(
         () => _i434.ExampleRepositoryImpl());
     return this;
   }
