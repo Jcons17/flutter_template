@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_template/core/app_routes.dart';
 import 'package:flutter_template/generated/l10n.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late final AppRouter _appRouter;
+
+  @override
+  void initState() {
+    _appRouter = AppRouter();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +37,7 @@ class MyApp extends StatelessWidget {
         Locale("es"),
         Locale("en"),
       ],
+      routerDelegate: _appRouter.delegate(),
     );
   }
 }

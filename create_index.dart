@@ -22,7 +22,6 @@ void createExportFiles(Directory directory) {
 
 void createExportFile(Directory directory) {
   final String folderName = directory.uri.pathSegments.elementAt(directory.uri.pathSegments.length - 2);
-  print(folderName);
   final String exportFilePath = '${directory.path}/$folderName.dart';
   final File exportFile = File(exportFilePath);
 
@@ -34,7 +33,6 @@ void createExportFile(Directory directory) {
   final List<FileSystemEntity> files = directory.listSync();
   for (var file in files) {
     if (file is File &&
-        !file.path.contains(".g.") &&
         !file.path.contains(".g.") &&
         !file.path.contains(".freezed.") &&
         file.path.endsWith('.dart') &&
