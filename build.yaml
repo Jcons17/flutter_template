@@ -1,8 +1,10 @@
 targets:
   $default:
-    sources:
-      - lib/models/**
     builders:
       auto_route_generator:auto_route_generator:
         generate_for:
-          - lib/presentation/pages/**/**_page.dart
+          - lib/core/presentation/pages/**/**_page.dart
+      injectable_generator:injectable_builder:
+        generate_for:
+          - lib/core/dependency_injection.dart
+          - lib/core/infrastructure/**/**_impl.dart
