@@ -21,27 +21,40 @@ void createExportFiles(Directory directory) {
 }
 
 void createExportFile(Directory directory) {
-  final String folderName = directory.uri.pathSegments.last;
-  final String exportFilePath = '${directory.path}/$folderName';
+  final String folderName = directory.uri.pathSegments.elementAt(directory.uri.pathSegments.length - 2);
+  print(folderName);
+  final String exportFilePath = '${directory.path}/$folderName.dart';
   final File exportFile = File(exportFilePath);
 
   final List<String> exports = [];
 
   // Recorre los archivos en la carpeta
+  exports.add("");
+
   final List<FileSystemEntity> files = directory.listSync();
   for (var file in files) {
-    if (file is File && file.path.endsWith('.dart') && file.path != exportFilePath) {
+    if (file is File &&
+        !file.path.contains(".g.") &&
+        !file.path.contains(".g.") &&
+        !file.path.contains(".freezed.") &&
+        file.path.endsWith('.dart') &&
+        file.path != exportFilePath) {
       // Agrega la línea de exportación para cada archivo Dart
       final String fileName = file.uri.pathSegments.last;
+      exports.remove(0);
       exports.add("export '$fileName';");
+    }
+  }
+  // Incluye exportaciones de subcarpetas
+  for (var file in files) {
+    if (file is Directory) {
+      final String subFolderName = file.uri.pathSegments.elementAt(file.uri.pathSegments.length - 2);
+      exports.add("export '$subFolderName/$subFolderName.dart';");
     }
   }
 
   // Escribe el contenido en el archivo con el nombre de la carpeta
   if (exports.isNotEmpty) {
     exportFile.writeAsStringSync(exports.join('\n'));
-    print('Archivo creado: ${exportFile.path}');
-  } else {
-    print('No se encontraron archivos Dart en ${directory.path}.');
-  }
+  } else {}
 }
