@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/core/app_routes.dart';
-import 'package:flutter_template/generated/l10n.dart';
+import 'package:flutter_template/core/l10n/app_localizations.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
         Locale("es"),
         Locale("en"),
       ],
-      routerDelegate: _appRouter.delegate(),
+      routerConfig: _appRouter.config(),
     );
   }
 }
